@@ -5,29 +5,13 @@
                     $("#carModal").modal('show');
                  });
 
-            // Load car models based on the selected brand
-            $('#car_brands').change(function() {
-                var brandId = $(this).val();
-                $.ajax({
-                    url: 'getCarModels.php', // Adjust the URL as per your project structure
-                    type: 'POST',
-                    data: {brand: brandId},
-                    dataType: 'json',
-                    success: function(data) {
-                        $('#car_models').html('<option value="">Select Car Model *</option>');
-                        $.each(data, function(key, value) {
-                            $('#car_models').append('<option value="' + value.id + '">' + value.model + '</option>');
-                        });
-                    }
-                });
-            });
-
+        
             // Submit form data to add a new car
             $('#addCarForm').submit(function(e) {
                 e.preventDefault();
                 var formData = new FormData(this);
                 $.ajax({
-                    url: 'addCar.php', // Adjust the URL as per your project structure
+                    url: 'core/actions.php', 
                     type: 'POST',
                     data: formData,
                     contentType: false,
@@ -35,7 +19,7 @@
                     success: function(response) {
                         alert('Car added successfully');
                         $('#carModal').modal('hide');
-                        // Optionally, refresh the saved cars list
+                        
                     },
                     error: function() {
                         alert('Error adding car');
@@ -52,7 +36,7 @@
 
 
 
-            // selection brand  to get car model
+              // Load car models based on the selected brand
 
             $('#carBrand').change(function() {
         var brand = $(this).val(); // Get the selected brand
@@ -60,7 +44,7 @@
         
         if(brand) {
             $.ajax({
-                url: 'core/actions.php', // Adjust the URL to your actual PHP script
+                url: 'core/actions.php', 
                 type: 'POST',
                 data: {brand: brand, action: 'getModels'},
                 dataType: 'json',

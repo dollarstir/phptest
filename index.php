@@ -35,7 +35,7 @@ require_once 'loader/autoloader.php';
                     <a href="#" class="list-group-item list-group-item-action">
                         <h5 class="mb-1">Toyota Camry</h5>
                         <p class="mb-1">Plate Number: XYZ1234</p>
-                        <small>Color: Red</small>
+                        <small>Color: <span style="display: inline-block; width: 18px; height: 18px; background-color: #116699; margin: 0; padding: 0; border: 1px solid #000;"></span></small>
                     </a>
                     <a href="#" class="list-group-item list-group-item-action">
                         <h5 class="mb-1">Honda Civic</h5>
@@ -51,41 +51,56 @@ require_once 'loader/autoloader.php';
                 <h5>Add New Car</h5>
                 <form>
                     <div class="form-group">
-                        <label for="carBrand">Car Brand</label>
-                        <select class="form-control" id="carBrand">
-                            <option value="">Select Brand</option>
+                        <label for="carBrand">Car Brand *</label>
+                        <select class="form-control" id="carBrand" name="carBrand">
+                            <option value="">Select Brand *</option>
                             <?php
                             $carBrands = CarModel::getCarBrands();
                             foreach($carBrands as $brand) {
                                 echo "<option value='{$brand['id']}'>{$brand['brand_name']}</option>";
                             }
                             ?>
-                            <!-- Add more options here -->
+                            
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="carModel">Car Model</label>
-                        <select class="form-control" id="carModel">
+                        <select class="form-control" id="carModel" name="carModel">
                             <option value="">Select Model</option>
                             <!-- Options will be added here based on the brand selected -->
                         </select>
                     </div>
+
+
+                    <div class="form-group">
+                        <label for="carYear">Car Year</label>
+                        <input type="text" class="form-control" id="carPlateNumber" placeholder="Enter Car  Year *" required name="carYear">
+                        <!-- hidden input to add car -->
+                        <input type="hidden" name="action" value="addCar">
+                    </div>
                     <div class="form-group">
                         <label for="carColor">Car Color</label>
-                        <select class="form-control" id="carColor">
+                        <select class="form-control" id="carColor" name="carColor">
                             <option value="">Select Color</option>
                             <?php
                             $colors = CarModel::getColors();
                             foreach($colors as $color) {
-                                echo "<option value='{$color['id']}'>{$color['name']}</option>";
+                                echo "<option value='{$color['id']}'>{$color['Name']}</option>";
                             }
                             ?> 
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="carPlateNumber">Plate Number</label>
-                        <input type="text" class="form-control" id="carPlateNumber" placeholder="Enter Plate Number">
+                        <input type="text" class="form-control" id="carPlateNumber" placeholder="Enter Plate Number" name="carPlate">
                     </div>
+
+
+                    <div class="form-group">
+                        <label for="carImage">Browse Car Image</label>
+                        <input type="file" class="form-control" id="carImage" name='imgCar'>
+                    </div>
+                    
                     <button type="submit" class="btn btn-primary">Add Car</button>
                 </form>
             </div>

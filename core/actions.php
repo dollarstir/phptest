@@ -7,4 +7,9 @@ switch($action){
         extract($_POST);
         echo json_encode(CarModel::getCarModels($brand));
         break;
+
+    case 'addCar':
+        $data = $_POST;
+        echo json_encode(CarModel::addCar($data));
+        break;
 }
