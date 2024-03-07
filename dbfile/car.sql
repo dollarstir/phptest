@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Mar 07, 2024 at 06:36 PM
+-- Generation Time: Mar 07, 2024 at 08:00 PM
 -- Server version: 8.0.36-0ubuntu0.23.10.1
 -- PHP Version: 8.2.10-2ubuntu1
 
@@ -74,13 +74,22 @@ CREATE TABLE `client_cars` (
   `client_id` int NOT NULL COMMENT 'Should be Foreign ket to client table',
   `brand_name` int NOT NULL COMMENT 'this field is foreign key\r\nlinkd to the car_brand table',
   `model` int NOT NULL COMMENT 'Foreign key to  car model table',
-  `vehicle_type` varchar(50) NOT NULL COMMENT 'my litle contribution is  this vehicle type field could have been avoided here since the car_model has vehicle type we use the car_model id to get it from car_model table',
+  `vehicle_type` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT 'my litle contribution is  this vehicle type field could have been avoided here since the car_model has vehicle type we use the car_model id to get it from car_model table',
   `year` varchar(10) DEFAULT NULL,
   `color` int NOT NULL COMMENT 'foreign key to color table',
   `license_plate` varchar(30) DEFAULT NULL,
   `image` text,
-  `timestamp` timestamp NOT NULL
+  `timestamp` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `client_cars`
+--
+
+INSERT INTO `client_cars` (`id`, `client_id`, `brand_name`, `model`, `vehicle_type`, `year`, `color`, `license_plate`, `image`, `timestamp`) VALUES
+(1, 1, 1, 1, NULL, '2015', 1, 'AS23423423', 'corolared.jpg', '2024-03-07 19:34:09'),
+(2, 1, 2, 3, NULL, '2015', 2, 'AS234234215', 'civicgreen.jpg', '2024-03-07 19:52:33'),
+(3, 1, 2, 4, NULL, '2019', 3, 'AS23423419', 'crvblue.jpg', '2024-03-07 19:59:48');
 
 -- --------------------------------------------------------
 
@@ -124,7 +133,10 @@ ALTER TABLE `car_models`
 -- Indexes for table `client_cars`
 --
 ALTER TABLE `client_cars`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `brand_name` (`brand_name`),
+  ADD KEY `model` (`model`),
+  ADD KEY `color` (`color`);
 
 --
 -- Indexes for table `colors`
@@ -152,7 +164,7 @@ ALTER TABLE `car_models`
 -- AUTO_INCREMENT for table `client_cars`
 --
 ALTER TABLE `client_cars`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `colors`
@@ -169,6 +181,14 @@ ALTER TABLE `colors`
 --
 ALTER TABLE `car_models`
   ADD CONSTRAINT `fk_brand_name` FOREIGN KEY (`brand_name`) REFERENCES `car_brands` (`id`);
+
+--
+-- Constraints for table `client_cars`
+--
+ALTER TABLE `client_cars`
+  ADD CONSTRAINT `client_cars_ibfk_1` FOREIGN KEY (`brand_name`) REFERENCES `car_brands` (`id`),
+  ADD CONSTRAINT `client_cars_ibfk_2` FOREIGN KEY (`model`) REFERENCES `car_models` (`id`),
+  ADD CONSTRAINT `client_cars_ibfk_3` FOREIGN KEY (`color`) REFERENCES `colors` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
