@@ -1,0 +1,2 @@
+{"message":"SQLSTATE[42S22]: Column not found: 1054 Unknown column 'cc.model_id' in 'on clause'","line":8,"code":"42S22","file":"\/var\/www\/html\/car\/core\/Query.php","date":"2024-03-07 19:45:20","other":""}
+{"message":"SQLSTATE[42S22]: Column not found: 1054 Unknown column 'cc.brand_id' in 'on clause'","line":8,"code":"42S22","file":"\/var\/www\/html\/car\/core\/Query.php","date":"2024-03-07 19:45:43","other":""}

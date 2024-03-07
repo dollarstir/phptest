@@ -16,6 +16,7 @@
                     data: formData,
                     contentType: false,
                     processData: false,
+                    
                     success: function(response) {
                         alert('Car added successfully');
                         $('#carModal').modal('hide');

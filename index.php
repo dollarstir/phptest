@@ -1,5 +1,7 @@
 <?php
 require_once 'loader/autoloader.php';
+$cars = CarModel::getCars();
+var_dump($cars);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -32,16 +34,17 @@ require_once 'loader/autoloader.php';
                 <h5>Saved Cars</h5>
                 <div class="list-group">
                     <!-- Dummy saved cars -->
-                    <a href="#" class="list-group-item list-group-item-action">
-                        <h5 class="mb-1">Toyota Camry</h5>
-                        <p class="mb-1">Plate Number: XYZ1234</p>
-                        <small>Color: <span style="display: inline-block; width: 18px; height: 18px; background-color: #116699; margin: 0; padding: 0; border: 1px solid #000;"></span></small>
-                    </a>
-                    <a href="#" class="list-group-item list-group-item-action">
-                        <h5 class="mb-1">Honda Civic</h5>
-                        <p class="mb-1">Plate Number: ABC5678</p>
-                        <small>Color: Blue</small>
-                    </a>
+                    <?php
+                    foreach ($cars as $car) {
+                    echo '<a href="#" class="list-group-item list-group-item-action">';
+                    echo '<h5 class="mb-1">' . htmlspecialchars($car['brand_name']) . ' ' . htmlspecialchars($car['model']) . '</h5>';
+                    echo '<p class="mb-1">Plate Number: ' . htmlspecialchars($car['license_plate']) . '</p>';
+                    echo '<small>Color: <span style="display: inline-block; width: 18px; height: 18px; background-color: ' . htmlspecialchars($car['color_hex']) . '; margin: 0; padding: 0; border: 1px solid #000;"></span> ' . htmlspecialchars($car['color_name']) . '</small>';
+                    echo '<br><small>Vehicle Type: ' . htmlspecialchars($car['vehicle_type']) . '</small>';
+                    echo '</a>';
+                
+                }
+                ?>
                 </div>
             </div>
         </div>
@@ -49,7 +52,7 @@ require_once 'loader/autoloader.php';
         <div class="row">
             <div class="col-12">
                 <h5>Add New Car</h5>
-                <form>
+                <form id="addCarForm">
                     <div class="form-group">
                         <label for="carBrand">Car Brand *</label>
                         <select class="form-control" id="carBrand" name="carBrand">

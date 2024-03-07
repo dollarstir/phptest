@@ -9,6 +9,8 @@ switch($action){
         break;
 
     case 'addCar':
+
+        echo 'add car action here...';
         $data = $_POST;
         echo json_encode(CarModel::addCar($data));
         break;
