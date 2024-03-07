@@ -1,7 +1,5 @@
 <?php
 require_once 'loader/autoloader.php';
-$cars = CarModel::getCars();
-var_dump($cars);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -35,16 +33,22 @@ var_dump($cars);
                 <div class="list-group">
                     <!-- Dummy saved cars -->
                     <?php
+                    $cars = CarModel::getCars();
                     foreach ($cars as $car) {
-                    echo '<a href="#" class="list-group-item list-group-item-action">';
-                    echo '<h5 class="mb-1">' . htmlspecialchars($car['brand_name']) . ' ' . htmlspecialchars($car['model']) . '</h5>';
-                    echo '<p class="mb-1">Plate Number: ' . htmlspecialchars($car['license_plate']) . '</p>';
-                    echo '<small>Color: <span style="display: inline-block; width: 18px; height: 18px; background-color: ' . htmlspecialchars($car['color_hex']) . '; margin: 0; padding: 0; border: 1px solid #000;"></span> ' . htmlspecialchars($car['color_name']) . '</small>';
-                    echo '<br><small>Vehicle Type: ' . htmlspecialchars($car['vehicle_type']) . '</small>';
-                    echo '</a>';
-                
-                }
-                ?>
+                        echo '<a href="#" class="list-group-item list-group-item-action">';
+                        // Check if there is an image and display it. You might need to adjust the path.
+                        if (!empty($car['image'])) {
+                            $imagePath = 'assets/images/' . htmlspecialchars($car['image']); // Adjust the path as necessary
+                            echo '<img src="' . $imagePath . '" alt="Car Image" style="width: 100px; height: auto; float: left; margin-right: 15px;">';
+                        }
+                        echo '<h5 class="mb-1">' . htmlspecialchars($car['brand_name']) . ' ' . htmlspecialchars($car['model']) . '</h5>';
+                        echo '<p class="mb-1">Plate Number: ' . htmlspecialchars($car['license_plate']) . '</p>';
+                        echo '<small>Color: <span style="display: inline-block; width: 18px; height: 18px; background-color:#' . htmlspecialchars($car['color_hex']) . '; margin: 0; padding: 0; border: 1px solid #000;"></span> ' . htmlspecialchars($car['color_name']) . '</small>';
+                        echo '<br><small>Vehicle Type: ' . htmlspecialchars($car['vehicle_type']) . '</small>';
+                        echo '</a>';
+                        echo '<div style="clear: both;"></div>'; // Clear float
+                    }
+                    ?>
                 </div>
             </div>
         </div>

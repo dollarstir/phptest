@@ -20,6 +20,7 @@
                     success: function(response) {
                         alert('Car added successfully');
                         $('#carModal').modal('hide');
+                        window.location.reload();
                         
                     },
                     error: function() {
